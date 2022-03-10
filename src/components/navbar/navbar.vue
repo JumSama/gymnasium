@@ -1,22 +1,33 @@
 <script setup>
-import MenuIcon from "@heroicons/vue/outline/MenuIcon";
-import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
+import MenuIcon from '@heroicons/vue/outline/MenuIcon'
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+defineProps({
+  isOpacity: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 
 <template>
   <div
-    class="h-16 mx-auto flex justify-between items-center bg-black text-base text-white fixed top-0 left-0 right-0 bg-opacity-0 z-50"
+    class="h-navbar mx-auto flex justify-between items-center bg-gray-900 text-base text-white fixed top-0 left-0 right-0 z-50"
+    :class="{ 'bg-transparent': isOpacity }"
   >
     <!-- logo -->
-    <div class="p-10 flex justify-center items-center">
-      <img src="@/assets/logo.svg" alt="logo" class="h-12" />
-      <span class="pl-10">NOBODY在线健身馆</span>
+    <div class="pl-10 flex justify-center items-center">
+      <router-link to="/">
+        <img src="@/assets/logo.svg" alt="logo" class="h-12" />
+      </router-link>
+      <router-link to="/" class="hidden sm:block">
+        <span class="pl-10">NOBODY在线健身馆</span>
+      </router-link>
     </div>
 
     <!-- 导航栏 -->
     <div class="md:block hidden pr-10">
       <ul class="flex gap-8">
-        <li><router-link to="">在线健身</router-link></li>
+        <li><router-link to="/gym">在线健身</router-link></li>
         <li><router-link to="">公益项目</router-link></li>
         <li><router-link to="">了解我们</router-link></li>
       </ul>

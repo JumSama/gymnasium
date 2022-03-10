@@ -1,5 +1,5 @@
 <script setup></script>
 
 <template>
-  <div></div>
+  <div class="h-navbar mx-auto"></div>
 </template>
