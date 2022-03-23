@@ -1,26 +1,18 @@
 <script setup>
 import navbar from '@/components/navbar/navbar.vue'
-import sidebar from '@/components/sidebar/sidebar.vue'
-import Block from '@/components/block/Block.vue'
-import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
-const route = useRoute()
-const showCategory = computed(() => {
-  if (route.name == 'Display') {
-    return false
-  } else {
-    return true
-  }
-})
+import loading from '@/components/loading/loading.vue'
+import { computed } from 'vue'
+import { useStore } from './store/globalStore'
+
+// 是否显示Loading状态
+const store = useStore()
+const isLoading = computed(() => store.isLoading)
 </script>
 
 <template>
   <div class="bg-white">
-    <navbar :isOpacity="!showCategory"></navbar>
-    <div v-if="showCategory">
-      <block></block>
-      <sidebar></sidebar>
-    </div>
+    <loading :isLoading="isLoading"></loading>
+    <navbar></navbar>
     <router-view></router-view>
   </div>
 </template>

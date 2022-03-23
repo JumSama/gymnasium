@@ -1,5 +1,6 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { computed } from 'vue'
 const parts = [
   {
     id: 1,
@@ -32,7 +33,11 @@ const parts = [
     icon: 'icon-leg'
   }
 ]
+
 const router = useRouter()
+const route = useRoute()
+
+const selected = computed(() => route.params.part_id)
 
 const changePart = (part) => {
   router.push(`/gym/category/${part}`)
@@ -48,7 +53,11 @@ const changePart = (part) => {
       v-for="(part, index) in parts"
       :key="part.id"
       class="basis-1/6 shrink-0 text-center h-full flex items-center cursor-pointer bg-cover bg-no-repeattransition ease-in-out duration-100 hover:bg-black hover:text-yellow-400"
-      @click="changePart(part.cname)"
+      @click="changePart(part.id)"
+      :class="{
+        'bg-black': selected == part.id,
+        'text-white': selected == part.id
+      }"
     >
       <p class="w-full text-lg">
         <span class="iconfont" :class="part.icon"></span>

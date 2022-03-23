@@ -1,6 +1,13 @@
 <script setup>
 import MenuIcon from '@heroicons/vue/outline/MenuIcon'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+import { useStore } from '@/store/globalStore.js'
+import { computed } from 'vue'
+
+const store = useStore()
+
+const isLogin = computed(() => store.isLogin)
+
 defineProps({
   isOpacity: {
     type: Boolean,
@@ -24,9 +31,17 @@ defineProps({
       </router-link>
     </div>
 
+    <div class="flex-1"></div>
+
+    <div class="flex items-center w-48" v-if="isLogin">
+      <div class="bg-white rounded-full w-10 h-10 mx-4"></div>
+      <span>状态 : 已登录</span>
+    </div>
+
     <!-- 导航栏 -->
     <div class="md:block hidden pr-10">
       <ul class="flex gap-8">
+        <li v-if="!isLogin"><router-link to="/login">登录</router-link></li>
         <li><router-link to="/gym">在线健身</router-link></li>
         <li><router-link to="">公益项目</router-link></li>
         <li><router-link to="">了解我们</router-link></li>
@@ -48,7 +63,7 @@ defineProps({
                 <li
                   class="border-b-white active:bg-opacity-10 active:bg-white h-10 leading-10"
                 >
-                  在线健身
+                  <router-link to="/gym">在线健身</router-link>
                 </li>
               </router-link>
               <li

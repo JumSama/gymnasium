@@ -1,5 +1,6 @@
 <script setup>
-window.addEventListener('scroll', (e) => {
+import { onUnmounted } from 'vue'
+function animation(e) {
   // clientHeight 客户窗口高度 1200
   // scrollTop 移动距离
   // scrollHeight滚动条高度  3000
@@ -53,6 +54,12 @@ window.addEventListener('scroll', (e) => {
   } else {
     body.style.opacity = 1
   }
+}
+
+window.addEventListener('scroll', animation)
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', animation)
 })
 </script>
 
@@ -67,10 +74,7 @@ window.addEventListener('scroll', (e) => {
         loop
         src="//v1.keepcdn.com/infra-cms/2021/05/27/12/27/896681731657_.mp4"
       ></video>
-      <h1 id="the-text">
-        Build your body<br />
-        自律给我自由
-      </h1>
+      <h1 id="the-text">Build your body<br /></h1>
       <div id="the-body">
         <svg
           id="the-muscle"
